@@ -11,8 +11,8 @@ export class KattisProblemParser extends Parser {
   public async parse(url: string, html: string): Promise<Sendable> {
     const elem = htmlToElement(html);
     const task = new TaskBuilder('Kattis').setUrl(url);
-
-    task.setName(elem.querySelector('h1').innerHTML.replace(/<br>/, ' - '));
+    const name = url.split('/');
+    task.setName(name[name.length - 1]);
 
     const contestNode = elem.querySelector('h2.title');
     if (contestNode !== null) {
